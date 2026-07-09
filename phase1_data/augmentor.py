@@ -56,7 +56,7 @@ Specs:
             item["description"] = generated
             item["augmented"] = True
     except Exception as e:
-        logger.debug(f"Augmentation failed for {item['title']}: {e}")
+        logger.warning(f"Augmentation failed for {item['title'][:40]}: {e}")
 
     return item
 
@@ -72,26 +72,28 @@ def run_augmentation(input_path: Path | None = None, output_path: Path | None = 
         items = json.load(f)
     logger.info(f"Loaded {len(items)} items from {input_path.name}")
 
-    # Resume: carry over augmented descriptions from previous run
+    # Resume: carry over ALL descriptions from previous output (augmented + failed)
     if output_path.exists():
         with open(output_path, "r", encoding="utf-8") as f:
             old_items = json.load(f)
-        old_desc = {}
+        # Build lookup by title → full item data from previous run
+        old_by_title = {}
         for it in old_items:
-            if it.get("augmented") and it.get("description"):
-                old_desc[it["title"]] = it["description"]
+            desc = it.get("description", "")
+            if desc and len(desc) >= MIN_DESCRIPTION_LENGTH:
+                old_by_title[it["title"]] = desc
         carried = 0
         for it in items:
             if not it.get("description") or len(it.get("description", "")) < MIN_DESCRIPTION_LENGTH:
-                if it["title"] in old_desc:
-                    it["description"] = old_desc[it["title"]]
+                if it["title"] in old_by_title:
+                    it["description"] = old_by_title[it["title"]]
                     it["augmented"] = True
                     carried += 1
-        if carried:
-            logger.info(f"Resumed {carried} augmented descriptions from previous run")
+        logger.info(f"Resumed {carried} descriptions from previous run ({len(old_by_title)} available)")
 
     thin = [i for i in items if not i.get("description") or len(i.get("description", "")) < MIN_DESCRIPTION_LENGTH]
-    logger.info(f"Total items: {len(items)}, thin descriptions to augment: {len(thin)}")
+    already_done = len(items) - len(thin)
+    logger.info(f"Total: {len(items)} | Already has description: {already_done} | Need augment: {len(thin)}")
 
     augmented_count = 0
     for idx, item in enumerate(tqdm(thin, desc="Augmenting"), 1):
