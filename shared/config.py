@@ -73,11 +73,19 @@ CATEGORY_COLORS = [
     "navy", "olive", "magenta", "gray", "salmon",
 ]
 
+USE_LOCAL_MODELS = os.getenv("USE_LOCAL_MODELS", "0")=="1"
+
 # Models
-OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "qwen3:4b")
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "qwen3-6-35b-a3b")
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 FRONTIER_MODEL = os.getenv("FRONTIER_MODEL", "gpt-4.1-mini")
 SPECIALIST_HF_SPACE = os.getenv("SPECIALIST_HF_SPACE", "")
+
+def get_anthropic_client():
+    if USE_LOCAL_MODELS:
+        return None, None, None
+
+    return None, None, None
 
 # Embedding model (Qwen3 via Ollama — strong on Vietnamese)
 EMBEDDING_MODEL = "qwen3-embedding"
