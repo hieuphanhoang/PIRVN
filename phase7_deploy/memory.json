@@ -1,0 +1,29 @@
+[
+  {
+    "deal": {
+      "product_description": "Laptop Gaming Asus ROG Strix GL553VD-FY305 với cấu hình mạnh mẽ và màn hình lớn",
+      "price": 10989000.0,
+      "url": "https://websosanh.vn/laptop-gaming-asus-rog-strix-gl553vd-fy305-intel-core/1846638103/so-sanh.htm"
+    },
+    "estimate": 22935265.3,
+    "discount": 11946265.3
+  },
+  {
+    "deal": {
+      "product_description": "Điều hòa Aqua 24000 BTU với công nghệ inverter và điều khiển không dây",
+      "price": 21010000.0,
+      "url": "https://websosanh.vn/dieu-hoa-may-lanh-aqua-aqa-kcrv24wnz-inverter-1/201026963/so-sanh.htm"
+    },
+    "estimate": 29037577.5,
+    "discount": 8027577.5
+  },
+  {
+    "deal": {
+      "product_description": "Máy giặt Panasonic 8 kg với công nghệ gia nhiệt inverter và khả năng chống nước tốt",
+      "price": 5049000.0,
+      "url": "https://websosanh.vn/may-giat-long-dung-panasonic-8-kg-na-f80vs8hrv/1247661348/so-sanh.htm"
+    },
+    "estimate": 8057403.399999999,
+    "discount": 3008403.3999999994
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "Y_MEAN": 15.65393352508545,
+  "Y_STD": 1.1518365144729614,
+  "n_features": 3000,
+  "hidden_size": 512,
+  "num_layers": 5,
+  "dropout_prob": 0.4
+}
